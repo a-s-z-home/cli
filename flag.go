@@ -129,9 +129,7 @@ type StringSliceFlag struct {
 
 // String returns the usage
 func (f StringSliceFlag) String() string {
-	firstName := strings.Trim(strings.Split(f.Name, ",")[0], " ")
-	pref := prefixFor(firstName)
-	return withEnvHint(f.EnvVar, fmt.Sprintf("%s [%v]\t%v", prefixedNames(f.Name), pref+firstName+" option "+pref+firstName+" option", f.Usage))
+	return withEnvHint(f.EnvVar, fmt.Sprintf("%s <arg> (one or multiple)\t%v", prefixedNames(f.Name), f.Usage))
 }
 
 // Apply populates the flag given the flag set and environment
@@ -198,9 +196,7 @@ type IntSliceFlag struct {
 
 // String returns the usage
 func (f IntSliceFlag) String() string {
-	firstName := strings.Trim(strings.Split(f.Name, ",")[0], " ")
-	pref := prefixFor(firstName)
-	return withEnvHint(f.EnvVar, fmt.Sprintf("%s [%v]\t%v", prefixedNames(f.Name), pref+firstName+" option "+pref+firstName+" option", f.Usage))
+	return withEnvHint(f.EnvVar, fmt.Sprintf("%s <arg> (one or multiple)\t%v", prefixedNames(f.Name), f.Usage))
 }
 
 // Apply populates the flag given the flag set and environment
@@ -380,7 +376,7 @@ type IntFlag struct {
 
 // String returns the usage
 func (f IntFlag) String() string {
-	return withEnvHint(f.EnvVar, fmt.Sprintf("%s \"%v\"\t%v", prefixedNames(f.Name), f.Value, f.Usage))
+	return withEnvHint(f.EnvVar, fmt.Sprintf("%s %v\t%v", prefixedNames(f.Name), f.Value, f.Usage)) 
 }
 
 // Apply populates the flag given the flag set and environment
