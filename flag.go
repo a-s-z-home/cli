@@ -125,11 +125,12 @@ type StringSliceFlag struct {
 	Value  *StringSlice
 	Usage  string
 	EnvVar string
+        Argument string
 }
 
 // String returns the usage
 func (f StringSliceFlag) String() string {
-	return withEnvHint(f.EnvVar, fmt.Sprintf("%s <arg> (one or multiple)\t%v", prefixedNames(f.Name), f.Usage))
+	return withEnvHint(f.EnvVar, fmt.Sprintf("%s %v (one or more)\t%v", prefixedNames(f.Name), f.Argument, f.Usage))
 }
 
 // Apply populates the flag given the flag set and environment
@@ -192,11 +193,12 @@ type IntSliceFlag struct {
 	Value  *IntSlice
 	Usage  string
 	EnvVar string
+        Argument string
 }
 
 // String returns the usage
 func (f IntSliceFlag) String() string {
-	return withEnvHint(f.EnvVar, fmt.Sprintf("%s <arg> (one or multiple)\t%v", prefixedNames(f.Name), f.Usage))
+	return withEnvHint(f.EnvVar, fmt.Sprintf("%s %s (one or more)\t%v", prefixedNames(f.Name), f.Argument, f.Usage))
 }
 
 // Apply populates the flag given the flag set and environment
@@ -241,7 +243,7 @@ type BoolFlag struct {
 
 // String returns a readable representation of this value (for usage defaults)
 func (f BoolFlag) String() string {
-	return withEnvHint(f.EnvVar, fmt.Sprintf("%s\t%v", prefixedNames(f.Name), f.Usage))
+	return withEnvHint(f.EnvVar, fmt.Sprintf("%s \t%v", prefixedNames(f.Name), f.Usage))
 }
 
 // Apply populates the flag given the flag set and environment
@@ -323,20 +325,12 @@ type StringFlag struct {
 	Usage       string
 	EnvVar      string
 	Destination *string
+        Argument    string
 }
 
 // String returns the usage
 func (f StringFlag) String() string {
-	var fmtString string
-	fmtString = "%s %v\t%v"
-
-	if len(f.Value) > 0 {
-		fmtString = "%s \"%v\"\t%v"
-	} else {
-		fmtString = "%s %v\t%v"
-	}
-
-	return withEnvHint(f.EnvVar, fmt.Sprintf(fmtString, prefixedNames(f.Name), f.Value, f.Usage))
+	return withEnvHint(f.EnvVar, fmt.Sprintf("%s %s \t%s", prefixedNames(f.Name), f.Argument, f.Usage))
 }
 
 // Apply populates the flag given the flag set and environment
@@ -372,11 +366,12 @@ type IntFlag struct {
 	Usage       string
 	EnvVar      string
 	Destination *int
+        Argument    string
 }
 
 // String returns the usage
 func (f IntFlag) String() string {
-	return withEnvHint(f.EnvVar, fmt.Sprintf("%s %v\t%v", prefixedNames(f.Name), f.Value, f.Usage)) 
+	return withEnvHint(f.EnvVar, fmt.Sprintf("%s %s\t%v", prefixedNames(f.Name), f.Argument, f.Usage)) 
 }
 
 // Apply populates the flag given the flag set and environment
