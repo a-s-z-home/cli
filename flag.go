@@ -67,13 +67,14 @@ type GenericFlag struct {
 	Value  Generic
 	Usage  string
 	EnvVar string
+        Arg    string
 }
 
 // String returns the string representation of the generic flag to display the
 // help text to the user (uses the String() method of the generic flag to show
 // the value)
 func (f GenericFlag) String() string {
-	return withEnvHint(f.EnvVar, fmt.Sprintf("%s%s \"%v\"\t%v", prefixFor(f.Name), f.Name, f.Value, f.Usage))
+	return withEnvHint(f.EnvVar, fmt.Sprintf("%s%s[=%v]\t%v", prefixFor(f.Name), f.Name, f.Arg, f.Usage))
 }
 
 // Apply takes the flagset and calls Set on the generic flag with the value
