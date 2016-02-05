@@ -286,7 +286,7 @@ type BoolTFlag struct {
 
 // String returns a readable representation of this value (for usage defaults)
 func (f BoolTFlag) String() string {
-	return withEnvHint(f.EnvVar, fmt.Sprintf("%s\t%v", prefixedNames(f.Name), f.Usage))
+	return withEnvHint(f.EnvVar, fmt.Sprintf("%s[=true]\t%v", prefixedNames(f.Name), f.Usage))
 }
 
 // Apply populates the flag given the flag set and environment
@@ -488,13 +488,7 @@ func (f Float64Flag) GetName() string {
 }
 
 func prefixFor(name string) (prefix string) {
-	if len(name) == 1 {
-		prefix = "-"
-	} else {
-		prefix = "--"
-	}
-
-	return
+	return "-"
 }
 
 func prefixedNames(fullName string) (prefixed string) {
