@@ -131,7 +131,7 @@ type StringSliceFlag struct {
 
 // String returns the usage
 func (f StringSliceFlag) String() string {
-	return withEnvHint(f.EnvVar, fmt.Sprintf("%s %v (one or more)\t%v", prefixedNames(f.Name), f.Argument, f.Usage))
+	return withEnvHint(f.EnvVar, fmt.Sprintf("%s %v [+]\t%v", prefixedNames(f.Name), f.Argument, f.Usage))
 }
 
 // Apply populates the flag given the flag set and environment
@@ -199,7 +199,7 @@ type IntSliceFlag struct {
 
 // String returns the usage
 func (f IntSliceFlag) String() string {
-	return withEnvHint(f.EnvVar, fmt.Sprintf("%s %s (one or more)\t%v", prefixedNames(f.Name), f.Argument, f.Usage))
+	return withEnvHint(f.EnvVar, fmt.Sprintf("%s %s [+]\t%v", prefixedNames(f.Name), f.Argument, f.Usage))
 }
 
 // Apply populates the flag given the flag set and environment
