@@ -132,8 +132,7 @@ func (a *App) Run(arguments []string) (err error) {
 	}
 
 	if err != nil {
-		fmt.Fprintln(a.Writer, "Incorrect Usage.")
-		fmt.Fprintln(a.Writer)
+		a.ShowUsageError(err)
 		ShowAppHelp(context)
 		return err
 	}
@@ -183,6 +182,11 @@ func (a *App) Run(arguments []string) (err error) {
 	// Run default Action
 	a.Action(context)
 	return nil
+}
+
+func (a *App) ShowUsageError(err error) {
+	fmt.Fprintln(a.Writer, "Incorrect Usage.", err)
+	fmt.Fprintln(a.Writer)
 }
 
 // Another entry point to the cli app, takes care of passing arguments and error handling
@@ -242,8 +246,7 @@ func (a *App) RunAsSubcommand(ctx *Context) (err error) {
 	}
 
 	if err != nil {
-		fmt.Fprintln(a.Writer, "Incorrect Usage.")
-		fmt.Fprintln(a.Writer)
+		a.ShowUsageError(err)
 		ShowSubcommandHelp(context)
 		return err
 	}

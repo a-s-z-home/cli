@@ -110,8 +110,7 @@ func (c Command) Run(ctx *Context) (err error) {
 	}
 
 	if err != nil {
-		fmt.Fprintln(ctx.App.Writer, "Incorrect Usage.")
-		fmt.Fprintln(ctx.App.Writer)
+		ctx.App.ShowUsageError(err)
 		ShowCommandHelp(ctx, c.Name)
 		return err
 	}
